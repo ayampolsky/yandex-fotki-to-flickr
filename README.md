@@ -131,7 +131,7 @@ The .csv files will be updated.
 
 ```index;album_name;picture_count;album_link;filename;flickr_album_id;flickr_album_link```
 
-* In `Pictures.csv` picture embed code on Flicker will be added.
+* In `Pictures.csv` picture embed code on Flickr will be added.
 
 ```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_embed_code```
 
