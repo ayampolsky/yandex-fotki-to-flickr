@@ -27,6 +27,11 @@ def requestPictureDescription (http, link):
       tags = tags + i
     fields = re.findall(r'"url":"(https://img-fotki.yandex.ru/get/[^"]*orig)"', s)
     img_orig = fields [0]
+    fields = re.findall(r'"added":([0-9]*)', s)
+    if (len (fields) > 0):
+      date_uploaded = "%d" % (int (fields [0]) / 1000 - 3600 * 2)
+    else:
+      date_uploaded = ''
     fields = re.findall(r'"latitude":([-0-9.]*),"longitude":([-0-9.]*)', s)
     if (len (fields) > 0):
       lat = fields [0] [0]
@@ -34,12 +39,12 @@ def requestPictureDescription (http, link):
     else:
       lat = ''
       lon = ''
-    return description, tags, img_orig, lat, lon
+    return description, tags, img_orig, date_uploaded, lat, lon
   except Exception as e:
     print (e)
     print ('Press any key...')
     input ()
-    return '', '', '', '', ''
+    return '', '', '', '', '', ''
 
 def isPictureInList (link):
   for picture in pictures:
@@ -77,8 +82,18 @@ for i in albums:
       link = j [0]
       if isPictureInList (link):
         continue
-      description, tags, img_orig, lat, lon = requestPictureDescription (http, link)
-      picture = {'link': link, 'title': j [2], 'description': description, 'tags': tags, 'img_small': j [1], 'img_orig': img_orig, 'lat': lat, 'lon': lon, 'album': album ['title']}
+      description, tags, img_orig, date_uploaded, lat, lon = requestPictureDescription (http, link)
+      picture = {
+        'link': link,
+        'title': j [2],
+        'description': description,
+        'tags': tags,
+        'img_small': j [1],
+        'img_orig': img_orig,
+        'date_uploaded': date_uploaded,
+        'lat': lat,
+        'lon': lon,
+        'album': album ['title']}
       pictures.append (picture)
       print (pictures_count, picture, '\n')
 
@@ -94,7 +109,17 @@ with open ('Pictures.csv', 'w' ) as f:
   for i in pictures:
     picture = i
     print (picture)
-    f.write ("%s;%s;%s;%s;%s;%s;%s;%s;%s\n" % (picture ['link'], picture ['title'], picture ['description'], picture ['tags'], picture ['img_small'], picture ['img_orig'], picture ['lat'], picture ['lon'], picture ['album']))
+    f.write ("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n" % (
+      picture ['link'],
+      picture ['title'],
+      picture ['description'],
+      picture ['tags'],
+      picture ['img_small'],
+      picture ['img_orig'],
+      picture ['date_uploaded'],
+      picture ['lat'],
+      picture ['lon'],
+      picture ['album']))
 
 pictures_map = {}
 for picture in pictures:

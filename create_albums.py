@@ -214,6 +214,8 @@ with open ('Albums.csv', 'r' ) as f:
     print (album)
   
 
+# Get the list of pictures from file
+
 pictures = []
 with open ('Pictures.csv', 'r' ) as f:
   for s in f.read().splitlines():
@@ -225,13 +227,14 @@ with open ('Pictures.csv', 'r' ) as f:
       'tags': fields [3],
       'img_small': fields [4],
       'img_orig': fields [5],
-      'lat': fields [6],
-      'lon': fields [7],
-      'album': fields [8]}
-    if (len (fields) > 9):
-      picture ['flickr_id'] = fields [9]
-      if (len (fields) > 10):
-        picture ['flickr_img_tag'] = fields [10]
+      'date_uploaded': fields [6],
+      'lat': fields [7],
+      'lon': fields [8],
+      'album': fields [9]}
+    if (len (fields) > 10):
+      picture ['flickr_id'] = fields [10]
+      if (len (fields) > 11):
+        picture ['flickr_img_tag'] = fields [11]
       else:
         picture ['flickr_img_tag'] = ''
     else:
@@ -359,13 +362,14 @@ with open ('Albums_flickr.csv', 'w') as f:
 with open ('Pictures_flickr.csv', 'w') as f:
   for picture in flickr_pictures:
     #print (picture)
-    f.write ("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n" % (
+    f.write ("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n" % (
       picture ['link'],
       picture ['title'],
       picture ['description'],
       picture ['tags'],
       picture ['img_small'],
       picture ['img_orig'],
+      picture ['date_uploaded'],
       picture ['lat'],
       picture ['lon'],
       picture ['album'],

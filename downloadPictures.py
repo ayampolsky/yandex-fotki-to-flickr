@@ -8,10 +8,25 @@ pictures = []
 with open ('Pictures.csv', 'r' ) as f:
   for s in f.read().splitlines():
     fields = s.split(';')
-    picture = {'link': fields [0], 'title': fields [1], 'description': fields [2], 'tags': fields [3], 'img_small': fields [4], 'img_orig': fields [5], 'lat': fields [6], 'lon': fields [7], 'album': fields [8]}
+    picture = {
+      'link': fields [0],
+      'title': fields [1],
+      'description': fields [2],
+      'tags': fields [3],
+      'img_small': fields [4],
+      'img_orig': fields [5],
+      'date_uploaded': fields [6],
+      'lat': fields [7],
+      'lon': fields [9],
+      'album': fields [9]}
     pictures.append (picture)
 
 def getFile (path, link):
+  if (link == ''):
+    print ('Link is empty')
+    print ('Press any key...')
+    input ()
+    return
   filename = path + '/' + link.split('/')[-1]
   if os.path.isfile(filename) == False:
     print ('Downloading', link, 'to', filename)
