@@ -62,9 +62,9 @@ sudo python3 setup.py install
 
 ```index;album_name;picture_count;album_link;filename;flickr_album_id;flickr_album_link```
 
-* D `Pictures.csv` добавится код для вставки изображения для Flickr.
+* D `Pictures.csv` добавится ID фотографии и код для вставки изображения для Flickr.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_embed_code```
+```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_id;flickr_embed_code```
 
 Автор программы Alexander Yampolsky.
 
@@ -131,9 +131,9 @@ The .csv files will be updated.
 
 ```index;album_name;picture_count;album_link;filename;flickr_album_id;flickr_album_link```
 
-* In `Pictures.csv` picture embed code on Flickr will be added.
+* In `Pictures.csv` picture ID and picture embed code on Flickr will be added.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_embed_code```
+```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_id;flickr_embed_code```
 
 Author of this program is Alexander Yampolsky.
 
