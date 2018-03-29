@@ -4,7 +4,7 @@ Migrate photos with metadata from Yandex.Fotki to Flickr
 Russian
 -------
 
-Фотохостинг Яндекс.Фотки предательски закрывается, оставляя тысячи пользователей без привычной возможности публиковать фотографии и обсуждать их, а также всех без картинок в огромном количестве блогов. Я размещаю инструменты, которые использовал сам для переноса своей коллекции фотографий с Яндекс.Фоток на Flickr с сохранением альбомов, названий фотографий, описаний, меток и географической привязки и с записью ссылок на фотографии на Flickr для автоматического поиска-замены в публикациях.
+Фотохостинг Яндекс.Фотки предательски закрывается, оставляя тысячи пользователей без привычной возможности публиковать фотографии и обсуждать их, а также всех без картинок в огромном количестве блогов. Я размещаю инструменты, которые использовал сам для переноса своей коллекции фотографий с Яндекс.Фоток на Flickr с сохранением альбомов, названий фотографий, описаний, меток, порядка загрузки и географической привязки и с записью ссылок на фотографии на Flickr для автоматического поиска-замены в публикациях.
 
 Требования
 ------------
@@ -28,7 +28,7 @@ Russian
 
 * `Pictures.csv` содержит список фотографий в следующем формате.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name```
+```page_link;name;description;tags;small_image_link;orig_image_link;upload_timestamp;latitude;longitude;album_name```
   
 3. Задать путь для загрузки файлов в переменных `path_small` и `path_orig` в `downloadPictures.py` и начать загружать фотографии. Процесс может быть остановлен, при перезапуске он продолжится с первой незагруженной фотографии.
 
@@ -64,7 +64,11 @@ sudo python3 setup.py install
 
 * D `Pictures.csv` добавится ID фотографии и код для вставки изображения для Flickr.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_id;flickr_embed_code```
+```page_link;name;description;tags;small_image_link;orig_image_link;upload_timestamp;latitude;longitude;album_name;flickr_id;flickr_embed_code```
+
+8. Установить дату загрузки для всех фотографий. Разумеется, дата загрузки не может быть раньше даты создания аккаунта. Поэтому фотографии будут упорядочены по дате загрузки, и им будет назначена сегодняшняя дата и время загрузки с шагом в секунду. В результате порядок отображения фотографий в Photostream будет совпадать с порядком на Яндекс.Фотках.
+
+```set_upload_dates.py```
 
 Автор программы Alexander Yampolsky.
 
@@ -73,7 +77,7 @@ sudo python3 setup.py install
 English
 -------
 
-Yandex.Fotki photo hosting service that is traitorously closing, leaving thousands of users without accustomed way of sharing and discussing their photographies, and everyone without pictures in a lot of blogs. I'm sharing tools I've used myself to migrate my picture collection from Yandex.Fotki to Flickr while preserving albums, photo names, descriptions, tags and geolocation, and saving links to pictures on Flickr for automatic find-replace in publications.
+Yandex.Fotki photo hosting service that is traitorously closing, leaving thousands of users without accustomed way of sharing and discussing their photographies, and everyone without pictures in a lot of blogs. I'm sharing tools I've used myself to migrate my picture collection from Yandex.Fotki to Flickr while preserving albums, photo names, descriptions, tags, upload order and geolocation, and saving links to pictures on Flickr for automatic find-replace in publications.
 
 Requirements
 ------------
@@ -97,7 +101,7 @@ Two .csv files will be created.
 
 * `Pictures.csv` contains list of pictures in the following format.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name```
+```page_link;name;description;tags;small_image_link;orig_image_link;upload_timestamp;latitude;longitude;album_name```
   
 3. Set download location in `path_small` and `path_orig` variables in `downloadPictures.py` and start downloading pictures. The process may be interrupted, it will continue on restart of script.
 
@@ -133,7 +137,11 @@ The .csv files will be updated.
 
 * In `Pictures.csv` picture ID and picture embed code on Flickr will be added.
 
-```page_link;name;description;tags;small_image_link;orig_image_link;latitude;longitude;album_name;flickr_id;flickr_embed_code```
+```page_link;name;description;tags;small_image_link;orig_image_link;upload_timestamp;latitude;longitude;album_name;flickr_id;flickr_embed_code```
+
+8. Set upload date for all pictures. Of course, upload date cannot be set before account registration date. So, pictures will be ordered by upload date, and current day timestamp with a step of 1 second will be set to them. Display order of pictures in Photostream will be the same as on Yandex.Fotki.
+
+```set_upload_dates.py```
 
 Author of this program is Alexander Yampolsky.
 
